@@ -8,6 +8,39 @@ let testGiving = [
 	{ name: "Test 5", email: "mugisha.au+test5@gmail.com" },
 ]
 
+exports.handler = async (event, context) => {
+	let body
+	let statusCode = 200
+	const headers = {
+		"Content-Type": "application/json",
+	}
+
+	try {
+		switch (event.routeKey) {
+			case "GET /ping":
+				body = "pong"
+				break
+			case "POST /roundRobin":
+				let requestJSON = JSON.parse(event.body)
+				body = RoundRobin(requestJSON)
+				break
+			default:
+				throw new Error(`Unsupported route: "${event.routeKey}"`)
+		}
+	} catch (err) {
+		statusCode = 400
+		body = err.message
+	} finally {
+		body = JSON.stringify(body)
+	}
+
+	return {
+		statusCode,
+		body,
+		headers,
+	}
+}
+
 function RoundRobin(list) {
 	let people = list
 	let firstPerson
@@ -41,5 +74,3 @@ function pickAndRemove(list) {
 function EmailSend(giver, reciever) {
 	return `Giver: ${giver.name}, Reciever: ${reciever.name}!`
 }
-
-console.log(RoundRobin(testGiving))
