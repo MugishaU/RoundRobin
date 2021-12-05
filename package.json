@@ -1,0 +1,12 @@
+{
+	"name": "roundrobin",
+	"version": "1.0.0",
+	"description": "Code for a lambda that sends emails in a random order, secret santa style",
+	"main": "index.js",
+	"scripts": {
+		"test": "test",
+		"start": "node index.js"
+	},
+	"author": "MugishaU",
+	"license": "MIT"
+}
