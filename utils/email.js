@@ -9,6 +9,7 @@ function send(emailObject) {
 	const customMessage = emailObject.customMessage
 		? `${emailObject.customMessage}<br/><br/>`
 		: ""
+
 	const htmlPart = `<h3>${
 		emailObject.customTitle ? emailObject.customTitle : emailObject.subject
 	}</h3><br/>Hi ${
@@ -16,6 +17,10 @@ function send(emailObject) {
 	},<br>${customMessage}You are getting a gift for <strong><u>${
 		emailObject.recieverName
 	}!</u><br/><h5>Powered by SecretSend ©</h5><strong>`
+
+	const subject = emailObject.subject
+		? emailObject.subject
+		: "You've got mail from SecretSend!"
 
 	const request = mailjet.post("send", { version: "v3.1" }).request({
 		Messages: [
@@ -30,7 +35,7 @@ function send(emailObject) {
 						Name: emailObject.giverName,
 					},
 				],
-				Subject: emailObject.subject,
+				Subject: subject,
 				HTMLPart: htmlPart,
 			},
 		],

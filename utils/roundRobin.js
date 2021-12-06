@@ -20,7 +20,6 @@ function RoundRobin(list) {
 				giverEmail: giver.email,
 				giverName: giver.name,
 				recieverName: reciever.name,
-				subject: "You've got mail from SecretSend!",
 			})
 			giver = reciever
 		}
@@ -28,7 +27,6 @@ function RoundRobin(list) {
 			giverEmail: giver.email,
 			giverName: giver.name,
 			recieverName: firstPerson.name,
-			subject: "You've got mail from SecretSend!",
 		})
 	} else {
 		throw new Error("List must contain more than one entry")
