@@ -16,10 +16,22 @@ function RoundRobin(list) {
 			}
 			const reciever = pickAndRemove(people)
 
-			result.push(email.send(giver, reciever))
+			email.send({
+				giverEmail: giver.email,
+				giverName: giver.name,
+				recieverName: reciever.name,
+				subject: "You've got mail from SecretSend!",
+			})
 			giver = reciever
 		}
-		result.push(email.send(giver, firstPerson))
+		email.send({
+			giverEmail: giver.email,
+			giverName: giver.name,
+			recieverName: firstPerson.name,
+			subject: "You've got mail from SecretSend!",
+		})
+	} else {
+		throw new Error("List must contain more than one entry")
 	}
 	return result
 }
