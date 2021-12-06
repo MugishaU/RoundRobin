@@ -1,6 +1,6 @@
 const email = require("./email")
 
-function RoundRobin(list) {
+async function RoundRobin(list) {
 	let people = list
 	let firstPerson
 	let giver
@@ -16,20 +16,24 @@ function RoundRobin(list) {
 			}
 			const reciever = pickAndRemove(people)
 
-			email.send({
+			const sendResult = await email.send({
 				giverEmail: giver.email,
 				giverName: giver.name,
 				recieverName: reciever.name,
 			})
+
+			result.push(sendResult)
 			giver = reciever
 		}
-		email.send({
+		const sendResult = await email.send({
 			giverEmail: giver.email,
 			giverName: giver.name,
 			recieverName: firstPerson.name,
 		})
+
+		result.push(sendResult)
 	} else {
-		throw new Error("List must contain more than one entry")
+		return "error"
 	}
 	return result
 }

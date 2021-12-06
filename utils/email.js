@@ -5,7 +5,7 @@ const mailjet = require("node-mailjet").connect(
 	process.env.MAILJET_SECRET_KEY
 )
 
-function send(emailObject) {
+async function send(emailObject) {
 	const subject = emailObject.subject
 		? emailObject.subject
 		: "You've got mail from SecretSend!"
@@ -22,31 +22,34 @@ function send(emailObject) {
 		emailObject.recieverName
 	}!</u><br/><h5>Powered by SecretSend ©</h5><strong>`
 
-	const request = mailjet.post("send", { version: "v3.1" }).request({
-		Messages: [
-			{
-				From: {
-					Email: "info@mugisha.io",
-					Name: "SecretSend",
-				},
-				To: [
-					{
-						Email: emailObject.giverEmail,
-						Name: emailObject.giverName,
+	try {
+		const request = await mailjet.post("send", { version: "v3.1" }).request({
+			Messages: [
+				{
+					From: {
+						Email: "info@mugisha.io",
+						Name: "SecretSend",
 					},
-				],
-				Subject: subject,
-				HTMLPart: htmlPart,
-			},
-		],
-	})
-	request
-		.then((result) => {
-			console.log(result.body.Messages[0].Status)
+					To: [
+						{
+							Email: emailObject.giverEmail,
+							Name: emailObject.giverName,
+						},
+					],
+					Subject: subject,
+					HTMLPart: htmlPart,
+				},
+			],
 		})
-		.catch((error) => {
-			console.log({ error: error.message, status: error.statusCode })
-		})
+		if (request.response.status == "200") {
+			console.log("Email sent successfully")
+			return []
+		}
+	} catch (error) {
+		const errResult = { error: error.message, status: error.statusCode }
+		console.error(errResult)
+		return errResult
+	}
 }
 
 exports.send = send
