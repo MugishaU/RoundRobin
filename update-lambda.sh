@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-zip -r RoundRobin.zip . -x "update-lambda" -x ".*" -x "package*" -x "README.md"
+zip -r RoundRobin.zip . -x "update-lambda.sh" -x ".*" -x "package*" -x "README.md"
 
 aws lambda update-function-code --function-name round-robin --zip-file fileb://RoundRobin.zip
 
