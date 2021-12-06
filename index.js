@@ -20,7 +20,7 @@ exports.handler = async (event, context) => {
 			case "GET /ping":
 				body = "pong"
 				break
-			case "POST /roundRobin":
+			case "POST /email":
 				let requestJSON = JSON.parse(event.body)
 				body = RoundRobin(requestJSON)
 				break
