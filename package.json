@@ -8,8 +8,5 @@
 		"start": "node index.js"
 	},
 	"author": "MugishaU",
-	"license": "MIT",
-	"dependencies": {
-		"aws-sdk": "^2.1043.0"
-	}
+	"license": "MIT"
 }

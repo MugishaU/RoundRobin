@@ -1,4 +1,4 @@
-const AWS = require("aws-sdk")
+const email = require("./email")
 
 let testGiving = [
 	{ name: "Test 1", email: "mugisha.au+test1@gmail.com" },
@@ -57,10 +57,10 @@ function RoundRobin(list) {
 			}
 			const reciever = pickAndRemove(people)
 
-			result.push(EmailSend(giver, reciever))
+			result.push(email.send(giver, reciever))
 			giver = reciever
 		}
-		result.push(EmailSend(giver, firstPerson))
+		result.push(email.send(giver, firstPerson))
 	}
 	return result
 }
@@ -69,8 +69,4 @@ function pickAndRemove(list) {
 	const listIndex = Math.floor(Math.random() * list.length)
 	const listItem = list.splice(listIndex, 1)[0]
 	return listItem
-}
-
-function EmailSend(giver, reciever) {
-	return `Giver: ${giver.name}, Reciever: ${reciever.name}!`
 }
