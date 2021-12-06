@@ -1,0 +1,8 @@
+{
+	"giverEmail": "Email of the person giving a gift.",
+	"giverName": "Name of the person giving a gift",
+	"recieverName": "Name of the person recieving a gift",
+	"subject": "Optionl. Subject of the email",
+	"customMessage": "Optional. Additional message in the email",
+	"customTitle": "Optional. Title Header in the email"
+}
