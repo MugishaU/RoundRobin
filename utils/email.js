@@ -43,7 +43,7 @@ async function send(emailObject) {
 		})
 		if (request.response.status == "200") {
 			console.log("Email sent successfully")
-			return []
+			return 200
 		}
 	} catch (error) {
 		const errResult = { error: error.message, status: error.statusCode }
