@@ -1,0 +1,11 @@
+{
+	"mainUser": { "name": "String", "email": "String" },
+	"recipients": [
+		{ "name": "String", "email": "String" },
+		{ "name": "String", "email": "String" }
+	],
+	"sendCopy": true,
+	"customSubject": "String",
+	"customTitle": "String",
+	"customMessage": "String"
+}

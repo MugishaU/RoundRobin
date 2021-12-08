@@ -1,36 +1,54 @@
 const email = require("./email")
 
-async function RoundRobin(list) {
-	let people = list
-	let firstPerson
-	let giver
+async function RoundRobin(reqBody) {
+	let firstPerson = reqBody.mainUser
+	let recipients = reqBody.recipients
+	let emailOptions = {}
+
+	if (reqBody.customSubject) {
+		emailOptions.customSubject = reqBody.customSubject
+	}
+
+	if (reqBody.customTitle) {
+		emailOptions.customTitle = reqBody.customTitle
+	}
+
+	if (reqBody.customMessage) {
+		emailOptions.customMessage = reqBody.customMessage
+	}
+
+	let giver = reqBody.mainUser
 	let result = []
+	let log = []
 
-	if (people.length > 1) {
-		while (people.length > 0) {
-			if (giver === undefined) {
-				const firstGiver = pickAndRemove(people)
+	if (recipients.length >= 1) {
+		while (recipients.length > 0) {
+			const reciever = pickAndRemove(recipients)
 
-				giver = firstGiver
-				firstPerson = firstGiver
-			}
-			const reciever = pickAndRemove(people)
+			const sendResult = await email.send(
+				{
+					giverEmail: giver.email,
+					giverName: giver.name,
+					recieverName: reciever.name,
+				},
+				emailOptions
+			)
 
-			const sendResult = await email.send({
-				giverEmail: giver.email,
-				giverName: giver.name,
-				recieverName: reciever.name,
-			})
+			log.push({ giver: giver, reciever: reciever })
 
 			result.push(sendResult)
 			giver = reciever
 		}
-		const sendResult = await email.send({
-			giverEmail: giver.email,
-			giverName: giver.name,
-			recieverName: firstPerson.name,
-		})
+		const sendResult = await email.send(
+			{
+				giverEmail: giver.email,
+				giverName: giver.name,
+				recieverName: firstPerson.name,
+			},
+			emailOptions
+		)
 
+		log.push({ giver: giver, reciever: firstPerson })
 		result.push(sendResult)
 	} else {
 		return "error"

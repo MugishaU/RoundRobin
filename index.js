@@ -37,10 +37,14 @@ exports.handler = async (event, context) => {
 	}
 }
 
-let testGiving = [
-	{ name: "Local Test 1", email: "mugisha.au+test1@gmail.com" },
-	{ name: "Local Test 2", email: "mugisha.au+test2@gmail.com" },
-	{ name: "Local Test 3", email: "mugisha.au+test3@gmail.com" },
-	{ name: "Local Test 4", email: "mugisha.au+test4@gmail.com" },
-	{ name: "Local Test 5", email: "mugisha.au+test5@gmail.com" },
-]
+let testGiving = {
+	mainUser: { name: "mainUser", email: "mugisha.au+test1@gmail.com" },
+	recipients: [
+		{ name: "recipient1", email: "mugisha.au+test2@gmail.com" },
+		{ name: "recipient2", email: "mugisha.au+test3@gmail.com" },
+	],
+	sendCopy: true,
+	customSubject: "Custom Subject",
+	customTitle: "Custom Title",
+	customMessage: "Custom Message",
+}

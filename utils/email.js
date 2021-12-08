@@ -5,17 +5,19 @@ const mailjet = require("node-mailjet").connect(
 	process.env.MAILJET_SECRET_KEY
 )
 
-async function send(emailObject) {
-	const subject = emailObject.subject
-		? emailObject.subject
+async function send(emailObject, emailOptions) {
+	const subject = emailOptions.customSubject
+		? emailOptions.customSubject
 		: "You've got mail from SecretSend!"
 
-	const customMessage = emailObject.customMessage
-		? `${emailObject.customMessage}<br/><br/>`
+	const customMessage = emailOptions.customMessage
+		? `${emailOptions.customMessage}<br/><br/>`
 		: ""
 
 	const htmlPart = `<h3>${
-		emailObject.customTitle ? emailObject.customTitle : subject
+		emailOptions.customTitle
+			? emailOptions.customTitle
+			: "You've got mail from SecretSend!"
 	}</h3><br/>Hi ${
 		emailObject.giverName
 	},<br>${customMessage}You are getting a gift for <strong><u>${
