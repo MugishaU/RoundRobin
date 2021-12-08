@@ -45,7 +45,7 @@ async function send(emailObject, emailOptions) {
 		})
 		if (request.response.status == "200") {
 			console.log("Email sent successfully")
-			return 200
+			return 202
 		}
 	} catch (error) {
 		const errResult = { error: error.message, status: error.statusCode }

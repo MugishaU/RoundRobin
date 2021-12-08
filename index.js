@@ -2,7 +2,7 @@ const { RoundRobin } = require("./utils/roundRobin")
 
 exports.handler = async (event, context) => {
 	let body
-	let statusCode = 200
+	let statusCode = 202
 	const headers = {
 		"Content-Type": "application/json",
 	}

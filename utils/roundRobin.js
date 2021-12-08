@@ -18,7 +18,7 @@ async function RoundRobin(reqBody) {
 	}
 
 	let giver = reqBody.mainUser
-	let result = []
+	let errors = []
 	let log = []
 
 	if (recipients.length >= 1) {
@@ -36,7 +36,9 @@ async function RoundRobin(reqBody) {
 
 			log.push({ giver: giver, reciever: reciever })
 
-			result.push(sendResult)
+			if (sendResult !== 202) {
+				errors.push(sendResult)
+			}
 			giver = reciever
 		}
 		const sendResult = await email.send(
@@ -49,11 +51,13 @@ async function RoundRobin(reqBody) {
 		)
 
 		log.push({ giver: giver, reciever: firstPerson })
-		result.push(sendResult)
+		if (sendResult !== 202) {
+			errors.push(sendResult)
+		}
 	} else {
 		return "error"
 	}
-	return result
+	return { errors: errors }
 }
 
 function pickAndRemove(list) {
