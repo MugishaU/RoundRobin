@@ -34,7 +34,7 @@ async function RoundRobin(reqBody) {
 				emailOptions
 			)
 
-			log.push({ giver: giver, reciever: reciever })
+			log.push({ giver: giver, reciever: { name: reciever.name } })
 
 			if (sendResult !== 202) {
 				errors.push(sendResult)
@@ -50,9 +50,16 @@ async function RoundRobin(reqBody) {
 			emailOptions
 		)
 
-		log.push({ giver: giver, reciever: firstPerson })
+		log.push({ giver: giver, reciever: { name: firstPerson.name } })
 		if (sendResult !== 202) {
 			errors.push(sendResult)
+		}
+
+		if (reqBody.sendReport) {
+			const reportResult = await email.report(firstPerson, log)
+			if (reportResult !== 202) {
+				errors.push(sendResult)
+			}
 		}
 	} else {
 		return "error"

@@ -43,7 +43,7 @@ let testGiving = {
 		{ name: "recipient1", email: "mugisha.au+test2@gmail.com" },
 		{ name: "recipient2", email: "mugisha.au+test3@gmail.com" },
 	],
-	sendCopy: true,
+	sendReport: true,
 	customSubject: "Custom Subject",
 	customTitle: "Custom Title",
 	customMessage: "Custom Message",
