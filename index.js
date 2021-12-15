@@ -19,13 +19,21 @@ exports.handler = async (event, context) => {
 				if (body === "error") {
 					throw new Error("List must contain more than one entry")
 				}
+
+				if (body.errors.length > 0) {
+					throw new Error("Some emails failed to send")
+				}
+
 				break
 			default:
 				throw new Error(`Unsupported route: "${event.routeKey}"`)
 		}
 	} catch (err) {
 		statusCode = 400
-		body = err.message
+		body = {
+			message: err.message,
+			body,
+		}
 	} finally {
 		body = JSON.stringify(body)
 	}
