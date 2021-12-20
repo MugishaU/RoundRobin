@@ -21,6 +21,10 @@ async function RoundRobin(reqBody) {
 	let errors = []
 	let log = []
 
+	if (!firstPerson) {
+		return "error"
+	}
+
 	if (recipients.length >= 1) {
 		while (recipients.length > 0) {
 			const reciever = pickAndRemove(recipients)

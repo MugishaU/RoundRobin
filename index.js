@@ -10,18 +10,21 @@ exports.handler = async (event, context) => {
 	try {
 		switch (event.routeKey) {
 			case "GET /wake":
-				body = "awake"
+				response = "awake"
 				break
 			case "POST /email":
 				let requestJSON = JSON.parse(event.body)
-				body = await RoundRobin(requestJSON)
+				response = await RoundRobin(requestJSON)
 
-				if (body === "error") {
-					throw new Error("List must contain more than one entry")
-				}
-
-				if (body.errors.length > 0) {
+				if (response === "error") {
+					throw new Error("Not enough recipients")
+				} else if (response.errors.length > 0) {
 					throw new Error("Some emails failed to send")
+				} else {
+					body = {
+						message: "Success",
+						errors: response.errors,
+					}
 				}
 
 				break
@@ -30,9 +33,13 @@ exports.handler = async (event, context) => {
 		}
 	} catch (err) {
 		statusCode = 400
+		let errors
+
+		response.errors ? (errors = response) : (errors = { errors: [err.message] })
+
 		body = {
 			message: err.message,
-			body,
+			errors: errors.errors,
 		}
 	} finally {
 		body = JSON.stringify(body)
