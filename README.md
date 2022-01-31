@@ -6,15 +6,18 @@ A REST-API that sends emails in a "Secret Santa" style to recipients. Deployed w
 
 Served from front end at https://secretsend.netlify.app/
 
-- REST API served at https://p3h7zn74oj.execute-api.eu-west-2.amazonaws.com
-
 ## Endpoints
 
 `Base URL` : https://p3h7zn74oj.execute-api.eu-west-2.amazonaws.com
 
 ---
 
-`GET /wake`
+### `GET /wake`
+
+Response:
+`awake`.
+
+Can be used as a health check or to wake the lambda.
 
 `POST /email`
 
