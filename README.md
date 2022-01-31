@@ -1,6 +1,22 @@
 # Round Robin
 
-Code for a lambda that sends emails in a random order, secret santa style. Sits behind an AWS API Gateway
+A REST-API that sends emails in a "Secret Santa" style to recipients. Deployed with AWS Gateway & Lambda. Utilises the https://www.mailjet.com/ API. Served by front end: https://github.com/MugishaU/secretsend_v2
+
+## Usage
+
+Served from front end at https://secretsend.netlify.app/
+
+- REST API served at https://p3h7zn74oj.execute-api.eu-west-2.amazonaws.com
+
+## Endpoints
+
+`Base URL` : https://p3h7zn74oj.execute-api.eu-west-2.amazonaws.com
+
+---
+
+`GET /wake`
+
+`POST /email`
 
 ---
 
