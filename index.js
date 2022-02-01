@@ -10,7 +10,7 @@ exports.handler = async (event, context) => {
 	try {
 		switch (event.routeKey) {
 			case "GET /wake":
-				response = "awake"
+				body = "awake"
 				break
 			case "POST /email":
 				let requestJSON = JSON.parse(event.body)
