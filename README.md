@@ -18,11 +18,11 @@ https://p3h7zn74oj.execute-api.eu-west-2.amazonaws.com
 
 ##### Code
 
-    200
+    `200`
 
 ##### Body
 
-    awake
+    `awake`
 
 ### Usage
 
