@@ -1,10 +1,20 @@
 # Round Robin
 
-A REST-API that sends emails in a "Secret Santa" style to recipients. Deployed with AWS Gateway & Lambda. Utilises the https://www.mailjet.com/ API. Served by front end: https://github.com/MugishaU/secretsend_v2
+> :warning: This entire project is called "SecretSend". This name was decided after this API was built, which is why naming is inconsistent between the front and back ends.
+
+A REST-API that sends emails in a "Secret Santa" style to recipients. Deployed with AWS Gateway & Lambda. Utilises the https://www.mailjet.com/ API. Served by front-end: https://github.com/MugishaU/secretsend_v2.
+
+This code along with the [front-end](https://github.com/MugishaU/secretsend_v2) were built from scratch with the aim of having functional code within one week.
 
 ## Usage
 
-Served from front end at https://secretsend.netlify.app/
+Served from front-end at https://secretsend.netlify.app/
+
+## Architecture
+
+Below is the architecture diagram for the entire SecretSend project. This repository only contains the backend portion of the project - "RoundRobin".
+
+<img src="architecture.svg" alt="architecture diagram">
 
 ## Endpoints
 
@@ -14,47 +24,51 @@ https://p3h7zn74oj.execute-api.eu-west-2.amazonaws.com
 
 ### `GET /wake`
 
-#### Response
+**Response**
 
-**Code** `202 Accepted`
+_Code:_ `202 Accepted`
 
-##### Body
+_Body Type:_ Application/JSON
 
-    "awake"
+_Body Content:_ `"awake"`
 
-### Usage
-
-Can be used as a health check or to wake the lambda.
+_Usage_: Can be used as a health check or to wake the lambda.
 
 ### `POST /email`
 
-#### Response
+**Request**
 
-**Code** `202 Accepted`
+_Body Type:_ Application/JSON
 
-##### Body
+_Body Content:_
+
+    {
+        "mainUser": { "name": STRING, "email": STRING },
+        "recipients": [
+            { "name": STRING, "email": STRING },
+            { "name": STRING, "email": STRING }
+        ],
+        "sendReport": BOOLEAN,
+        "customSubject": STRING,      [OPTIONAL]
+        "customTitle": STRING,        [OPTIONAL]
+        "customMessage": STRING       [OPTIONAL]
+    }
+
+**Response**
+
+_Code:_ `202 Accepted`
+
+_Body Type:_ Application/JSON
+
+_Body Content:_
 
     {
         "message": "Success",
         "errors": []
     }
 
-### Usage
+_Usage_: Used to send emails to all recipients in a seret santa style.
 
-Can be used as a health check or to wake the lambda.
+## Issues
 
----
-
-## Request Body
-
-    {
-    "mainUser": { "name": "String", "email": "String" },
-    "recipients": [
-    	{ "name": "String", "email": "String" },
-    	{ "name": "String", "email": "String" }
-    ],
-    "sendReport": true,
-    "customSubject": "String",
-    "customTitle": "String",
-    "customMessage": "String"
-    }
+- No authentication on API due to difficulties in signing frontend calls with an AWS Signature. JWT's could be used instead.
