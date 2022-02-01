@@ -1,6 +1,6 @@
 # Round Robin
 
-> :warning: This entire project is called "SecretSend". This name was decided after this API was built, which is why naming is inconsistent between the front and back ends.
+> :warning: This entire project is called "SecretSend". This name was decided after this API was built, which is why naming is inconsistent between the front and back end.
 
 A REST-API that sends emails in a "Secret Santa" style to recipients. Deployed with AWS Gateway & Lambda. Utilises the https://www.mailjet.com/ API. Served by front-end: https://github.com/MugishaU/secretsend_v2.
 
