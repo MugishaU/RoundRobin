@@ -16,14 +16,45 @@ https://p3h7zn74oj.execute-api.eu-west-2.amazonaws.com
 
 #### Response
 
-##### Code
-
-    `200`
+**Code** `202 Accepted`
 
 ##### Body
 
-    `awake`
+    "awake"
 
 ### Usage
 
 Can be used as a health check or to wake the lambda.
+
+### `POST /email`
+
+#### Response
+
+**Code** `202 Accepted`
+
+##### Body
+
+    {
+        "message": "Success",
+        "errors": []
+    }
+
+### Usage
+
+Can be used as a health check or to wake the lambda.
+
+---
+
+## Request Body
+
+    {
+    "mainUser": { "name": "String", "email": "String" },
+    "recipients": [
+    	{ "name": "String", "email": "String" },
+    	{ "name": "String", "email": "String" }
+    ],
+    "sendReport": true,
+    "customSubject": "String",
+    "customTitle": "String",
+    "customMessage": "String"
+    }
