@@ -13,6 +13,7 @@ Served from front-end at https://secretsend.netlify.app/
 ## Architecture
 
 Below is the architecture diagram for the entire SecretSend project. This repository only contains the backend portion of the project - "RoundRobin".
+Both the burst & rate limit at the API Gateway level are set to 10, to protect the infrastructure from abuse.
 
 <img src="architecture.svg" alt="architecture diagram">
 
@@ -71,4 +72,4 @@ _Usage_: Used to send emails to all recipients in a seret santa style.
 
 ## Issues
 
-- No authentication on API due to difficulties in signing frontend calls with an AWS Signature. JWT's could be used instead.
+- No authentication on API due to difficulties in signing frontend calls with an AWS Signature. JWT's could be used instead. With AWS authentication enabled, the API could be easily called from POSTMAN, but couldn't replicate the behaviour from my front-end client & AWS documentation on the SDK usage is lacking.
