@@ -8,31 +8,22 @@ Served from front end at https://secretsend.netlify.app/
 
 ## Endpoints
 
-`Base URL` : https://p3h7zn74oj.execute-api.eu-west-2.amazonaws.com
+### `Base URL`
 
----
+https://p3h7zn74oj.execute-api.eu-west-2.amazonaws.com
 
 ### `GET /wake`
 
-Response:
-`awake`.
+#### Response
+
+##### Code
+
+    200
+
+##### Body
+
+    awake
+
+### Usage
 
 Can be used as a health check or to wake the lambda.
-
-`POST /email`
-
----
-
-## Request Body
-
-    {
-    "mainUser": { "name": "String", "email": "String" },
-    "recipients": [
-    	{ "name": "String", "email": "String" },
-    	{ "name": "String", "email": "String" }
-    ],
-    "sendReport": true,
-    "customSubject": "String",
-    "customTitle": "String",
-    "customMessage": "String"
-    }
