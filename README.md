@@ -49,9 +49,9 @@ _Body Content:_
             { "name": STRING, "email": STRING }
         ],
         "sendReport": BOOLEAN,
-        "customSubject": STRING,      [OPTIONAL]
-        "customTitle": STRING,        [OPTIONAL]
-        "customMessage": STRING       [OPTIONAL]
+        "customSubject": STRING,  [OPTIONAL]
+        "customTitle": STRING,    [OPTIONAL]
+        "customMessage": STRING   [OPTIONAL]
     }
 
 **Response**
